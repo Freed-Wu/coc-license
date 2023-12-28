@@ -1,5 +1,8 @@
 import { BasicList, ListAction, ListItem, Neovim, window } from "coc.nvim";
 import getLicense from "license";
+// https://github.com/Ovyerus/license/issues/14
+import { sync as parseGitConfig } from "parse-git-config";
+import gitPath from "git-config-path";
 import fs from "node:fs";
 import licenses from "@ovyerus/licenses";
 import colors from "colors/safe";
@@ -15,13 +18,21 @@ export default class LicenseList extends BasicList {
 
   constructor(nvim: Neovim) {
     super(nvim);
+    const gitConfig = () =>
+      parseGitConfig({ cwd: "/", path: gitPath("global") });
+    const username = gitConfig().user?.name || process.env.USER;
+    const email = gitConfig().user?.email || process.env.EMAIL;
 
     this.addAction("create", (item: ListItem) => {
       let status = "succeed";
-      fs.writeFile("LICENSE", `${getLicense(item.data.name)}`, (err) => {
-        if (err) status = "failed";
-        window.showMessage(`${item.data.word} LICENSE ${status} to create!`);
-      });
+      fs.writeFile(
+        "LICENSE",
+        `${getLicense(item.data.word, { author: username, email: email })}`,
+        (err) => {
+          if (err) status = "failed";
+          window.showMessage(`${item.data.word} LICENSE ${status} to create!`);
+        },
+      );
     });
 
     this.addAction("url-open", (item: ListItem) => {
