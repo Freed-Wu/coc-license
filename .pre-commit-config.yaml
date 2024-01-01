@@ -76,6 +76,6 @@ repos:
     hooks:
       - id: prettier
   - repo: https://github.com/eslint/eslint
-    rev: v8.56.0
+    rev: v9.0.0-alpha.0
     hooks:
       - id: eslint
