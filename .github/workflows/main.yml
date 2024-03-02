@@ -20,7 +20,12 @@ jobs:
       - name: Build
         run: |
           yarn
-          yarn build
+          yarn pack
+        env:
+          NODE_ENV: production
+      - uses: softprops/action-gh-release@v1
+        with:
+          files: "*.tgz"
       - name: Publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}

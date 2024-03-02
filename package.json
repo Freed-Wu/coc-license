@@ -15,8 +15,7 @@
     "lint": "eslint src --ext ts",
     "clean": "rimraf lib",
     "watch": "node esbuild.mjs --watch",
-    "build": "node esbuild.mjs",
-    "prepare": "node esbuild.mjs"
+    "prepack": "node esbuild.mjs"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",
