@@ -50,7 +50,7 @@
         },
         "coc.source.license.priority": {
           "type": "integer",
-          "default": 25,
+          "default": 0,
           "description": "Priority of coc-license extension"
         }
       }
