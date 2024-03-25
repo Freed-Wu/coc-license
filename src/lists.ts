@@ -3,12 +3,12 @@ import getLicense from "license";
 // https://github.com/Ovyerus/license/issues/14
 import { sync as parseGitConfig } from "parse-git-config";
 import gitPath from "git-config-path";
-import fs from "node:fs";
+import fs from "fs";
 import licenses from "@ovyerus/licenses";
 import colors from "colors/safe";
 // https://github.com/sindresorhus/open/issues/330
-import exec from "node:child_process";
-import os from "node:os";
+import exec from "child_process";
+import os from "os";
 
 export default class LicenseList extends BasicList {
   public readonly name = "licenses";
