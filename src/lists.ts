@@ -24,14 +24,9 @@ export default class LicenseList extends BasicList {
     const email = gitConfig().user?.email || process.env.EMAIL;
 
     this.addAction("create", (item: ListItem) => {
-      let status = "succeed";
-      fs.writeFile(
+      fs.writeFileSync(
         "LICENSE",
         `${getLicense(item.data.word, { author: username, email: email })}`,
-        (err) => {
-          if (err) status = "failed";
-          window.showMessage(`${item.data.word} LICENSE ${status} to create!`);
-        },
       );
     });
 
